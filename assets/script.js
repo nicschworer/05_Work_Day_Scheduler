@@ -16,12 +16,12 @@ var hours = {
 };
 
 var currentHour = moment().hour();
-console.log(currentDayEl);
-console.log(currentHour);
 
 // FUNCTIONS
 
 currentDayEl.html(moment().format('LLLL'));
+
+
 
 
 
