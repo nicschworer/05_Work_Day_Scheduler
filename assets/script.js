@@ -4,18 +4,43 @@ var mainEl = $(".container");
 var userInput = '';
 
 var hours = {
-    nine: "fuck",
-    ten: "shit",
-    fourteen: "damn",
+    8: '',
+    9: "fuck",
+    10: "shit",
+    11: '',
+    12: '',
+    13: '',
+    14: '"damn"',
+    15: '',
+    16: '',
+    17: '',
+    18: '',
+};
+
+var hoursEmpty = {
+    8: '',
+    9: '',
+    10: '',
+    11: '',
+    12: '',
+    13: '',
+    14: '',
+    15: '',
+    16: '',
+    17: '',
+    18: '',
 };
 
 var currentHour = moment().hour();
+console.log(currentHour);
+var currentHourSt = currentHour.toString();
+console.log(currentHourSt);
 
 // FUNCTIONS
 
 currentDayEl.html(moment().format('LLLL'));
 
-localStorage.setItem("hours", JSON.stringify(hours)); //remove
+// localStorage.setItem("hours", JSON.stringify(hours)); //removex
 
    
 
@@ -25,15 +50,22 @@ localStorage.setItem("hours", JSON.stringify(hours)); //remove
 function readFromLocalStorage () {
     hours = JSON.parse(localStorage.getItem("hours"));
     if (hours == undefined) {
-        hours = {};
-    } else {
-        for (const [key, value] of Object.entries(hours)) {
-           var propertyHour =  "#" + `${key}`;
-           $(propertyHour).find(".description").html(`${value}`);
-           
+        hours = hoursEmpty;
+    }
+    for (const [key, value] of Object.entries(hours)) {
+        var propertyHour =  "#" + `${key}`;
+        $(propertyHour).find(".description").html(`${value}`);
+        var hourCompare = parseInt(`${key}`);
+        if (hourCompare === currentHour) {
+            $(propertyHour).find(".description").addClass("current");
+        } else if (hourCompare > currentHour) {
+            $(propertyHour).find(".description").addClass("future");
+        } else if (hourCompare < currentHourSt) {
+            $(propertyHour).find(".description").addClass("past");
+        }
     }
 }  
-}
+
 //     <!-- this is to look for anything saved previously in local storage -->
 //         use for loop
 //             - read value from time property
@@ -49,6 +81,7 @@ readFromLocalStorage();
 //             - trim text, trim schedule hour
 //             - send to local storage
 //     call readFromLocalStorage(); 
+
 
 
 
