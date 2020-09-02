@@ -2,6 +2,7 @@
 var currentDayEl = $("#currentDay");
 var mainEl = $(".container");
 var userInput = '';
+var saveBtn = $("button");
 
 var hours = {
     8: '',
@@ -32,29 +33,28 @@ var hoursEmpty = {
 };
 
 var currentHour = moment().hour();
-console.log(currentHour);
 var currentHourSt = currentHour.toString();
-console.log(currentHourSt);
 
 // FUNCTIONS
-
+// add current day and date with moments to #currentDay
 currentDayEl.html(moment().format('LLLL'));
 
-// localStorage.setItem("hours", JSON.stringify(hours)); //removex
+// localStorage.setItem("hours", JSON.stringify(hours));
 
-   
-
-// JS
-// add current day and date with moments to #currentDay
-//     function readFromLocalStorage ()
+//  - function readFromLocalStorage ()
 function readFromLocalStorage () {
     hours = JSON.parse(localStorage.getItem("hours"));
     if (hours == undefined) {
         hours = hoursEmpty;
     }
+//  use for loop
+//  - read value from time property
+//  - assign as text back in element (using its class (.description) and id (specific to each hour)
     for (const [key, value] of Object.entries(hours)) {
         var propertyHour =  "#" + `${key}`;
         $(propertyHour).find(".description").html(`${value}`);
+//  - check current hour vs time slot (to determine color of text area: gray, red or white)
+//  - assign proper class (.past .present .future) based on comparison to current hour (<,>, === or <=, >=, ===)
         var hourCompare = parseInt(`${key}`);
         if (hourCompare === currentHour) {
             $(propertyHour).find(".description").addClass("current");
@@ -64,18 +64,17 @@ function readFromLocalStorage () {
             $(propertyHour).find(".description").addClass("past");
         }
     }
-}  
-
+};  
 //     <!-- this is to look for anything saved previously in local storage -->
-//         use for loop
-//             - read value from time property
-//             - assign as text back in element (using its class (.description) and id (specific to each hour)
-//             - check current hour vs time slot (to determine color of text area: gray, red or white)
-//                 - assign proper class (.past .present .future) based on comparison to current hour (<,>, === or <=, >=, ===)
+
 readFromLocalStorage();
 
+function saveToLocalStorage() {
+    var userBlock = event.target.parentElement;
+    // var userInput = userBlock.find(".description").text
+}
+
 //     <!-- this is to save a value from the text area to local storage, using the hour as the key when save button is clicked -->
-//         add click event to save button class to run function
 //             - read text from text area (class = "description", should be parent of save button)
 //             - read schedule hour
 //             - trim text, trim schedule hour
@@ -84,6 +83,8 @@ readFromLocalStorage();
 
 
 
+// add click event to save button class to run function
+saveBtn.on("click", saveToLocalStorage);
 
 
 
