@@ -70,8 +70,9 @@ function readFromLocalStorage () {
 readFromLocalStorage();
 
 function saveToLocalStorage() {
-    var userBlock = event.target.parentElement;
-    // var userInput = userBlock.find(".description").text
+    var userInput = $(this).siblings('textarea').val();
+    var hourBlockInput = $(this).parent().attr("id");
+    console.log(hourBlockInput)
 }
 
 //     <!-- this is to save a value from the text area to local storage, using the hour as the key when save button is clicked -->
