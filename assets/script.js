@@ -36,7 +36,7 @@ function readFromLocalStorage () {
 //  use for loop
 //  - read value from time property
 //  - assign as text back in element (using its class (.description) and id (specific to each hour)
-    for (const [key, value] of Object.entries(hours)) {
+    for (var [key, value] of Object.entries(hours)) {
         var propertyHour = "#" + `${key}`;
         // console.log(propertyHour);
         $(propertyHour).find(".description").html(`${value}`);
@@ -81,6 +81,14 @@ function saveToLocalStorage() {
 
 // add click event to save button class to run function
 saveBtn.on("click", saveToLocalStorage);
+
+var ex = [1, 2, 3, 4];
+
+for (i=0; i<ex.length; i++) {
+    console.log(ex[i]);
+}
+
+for ()
 
 
 
