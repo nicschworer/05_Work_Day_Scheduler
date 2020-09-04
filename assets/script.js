@@ -2,7 +2,8 @@
 var currentDayEl = $("#currentDay");
 var mainEl = $(".container");
 var userInput = '';
-var saveBtn = $("button");
+var saveBtn = $(".saveBtn");
+var clearBtnEl = $(".clearBtn");
 
 var hoursEmpty = {
     8: '',
@@ -64,31 +65,18 @@ function saveToLocalStorage() {
     // console.log(hourBlockInput)
     //  - send to local storage
     hours[hourBlockInput] = userInput;
-
     localStorage.setItem("hours", JSON.stringify(hours));
-
-
     readFromLocalStorage();
 }
-
-//     <!-- this is to save a value from the text area to local storage, using the hour as the key when save button is clicked -->
-//             - read schedule hour
-//             - trim text, trim schedule hour
-//             - send to local storage
-//     call readFromLocalStorage(); 
-
-
 
 // add click event to save button class to run function
 saveBtn.on("click", saveToLocalStorage);
 
-var ex = [1, 2, 3, 4];
+clearBtnEl.on("click", function() {
+    localStorage.clear();
+    readFromLocalStorage();
+})
 
-for (i=0; i<ex.length; i++) {
-    console.log(ex[i]);
-}
-
-for ()
 
 
 
